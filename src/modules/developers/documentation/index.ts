@@ -79,6 +79,80 @@ const developerDocumentation = {
       },
     },
   },
+  ApiResponse: {
+    getDeveloperById: {
+      Success: {
+        status: 200,
+        description: 'Developer encontrado com sucesso!',
+      },
+      BadRequest: {
+        status: 400,
+        description: 'Algo não foi preenchido corretamente!',
+      },
+    },
+    getTechnologyById: {
+      Success: {
+        status: 200,
+        description: 'Technology encontrada com sucesso!',
+      },
+      BadRequest: {
+        status: 400,
+        description: 'Algo não foi preenchido corretamente!',
+      },
+    },
+    createTechnology: {
+      Success: {
+        status: 200,
+        description: 'Technology criada com sucesso!',
+      },
+      BadRequest: {
+        status: 400,
+        description: 'Algo não foi preenchido corretamente!',
+      },
+      Conflict: {
+        status: 409,
+        description: 'Já existe uma Technology com esse nome!',
+      },
+    },
+    createManyTechnologies: {
+      Success: {
+        status: 200,
+        description: 'Technologies criadas com sucesso!',
+      },
+      BadRequest: {
+        status: 400,
+        description: 'Algo não foi preenchido corretamente!',
+      },
+      Conflict: {
+        status: 409,
+        description: 'Alguma Technology já está cadastrada, revise os dados!',
+      },
+    },
+    createDeveloper: {
+      Success: {
+        status: 200,
+        description: 'Developer criado com sucesso!',
+      },
+      BadRequest: {
+        status: 400,
+        description: 'Algo não foi preenchido corretamente!',
+      },
+      Conflict: {
+        status: 409,
+        description: 'Já existe um Developer com esse user_id!',
+      },
+    },
+    updateDeveloper: {
+      Success: {
+        status: 200,
+        description: 'Developer atualizado com sucesso!',
+      },
+      BadRequest: {
+        status: 400,
+        description: 'Algo não foi preenchido corretamente!',
+      },
+    },
+  },
 };
 
 export { developerDocumentation };
