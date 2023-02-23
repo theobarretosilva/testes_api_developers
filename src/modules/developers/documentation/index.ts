@@ -31,6 +31,54 @@ const developerDocumentation = {
         'Este endpoint recebe como Param o id do developer e recebe no Body as tecnologias do developer, os meses de experiência e se ele aceita trabalhar remotamente, retornando o developer atualizado',
     },
   },
+  ApiProperty: {
+    CreateDeveloperDto: {
+      AcceptedRemoteWork: {
+        name: 'acceptedRemoteWork',
+        required: false,
+        example: true,
+      },
+      MonthsOfExperience: {
+        name: 'monthsOfExperience',
+        required: true,
+        example: 3,
+      },
+      User_id: {
+        name: 'user_id',
+        required: true,
+        example: '2',
+      },
+      Technologies: {
+        name: 'technologies',
+        required: true,
+        example: [1, 2, 3],
+      },
+    },
+    CreateTechnologyDto: {
+      Name: {
+        name: 'name',
+        required: true,
+        example: 'Java',
+      },
+    },
+    UpdateDeveloperDto: {
+      AcceptedRemoteWork: {
+        name: 'acceptedRemoteWork',
+        required: false,
+        example: true,
+      },
+      MonthsOfExperience: {
+        name: 'monthsOfExperience',
+        required: false,
+        example: 3,
+      },
+      Technologies: {
+        name: 'technologies',
+        required: false,
+        example: [1, 2, 3],
+      },
+    },
+  },
 };
 
 export { developerDocumentation };
