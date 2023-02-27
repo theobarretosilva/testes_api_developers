@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { UserService } from 'src/modules/users/services/user.service';
 import { DeveloperRepository } from '../repositories/developer.repository';
-import { TechnologyRepository } from '../repositories/technology.repository';
 import { DeveloperService } from './developer.service';
 import { TechnologyService } from './technology.service';
 
