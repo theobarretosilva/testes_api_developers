@@ -37,4 +37,6 @@ export class TestStatic {
 
     return countries;
   }
+
+  static 
 }
