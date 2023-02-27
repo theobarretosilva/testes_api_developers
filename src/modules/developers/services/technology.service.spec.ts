@@ -81,7 +81,9 @@ describe('technologyService', () => {
       expect(mockRepository.createTechnology).toHaveBeenCalledTimes(1);
     });
 
-    it('Deve retornar uma exceção, pois já existe uma Technology com esses dados', async () => {});
+    it('Deve retornar uma exceção, pois já existe uma Technology com esses dados', async () => {
+      mockRepository.createTechnology.mockReturnValue(null);
+    });
 
     it('Deve retornar uma exceção, pois não foi possivel salvar a Technology', async () => {});
   });
