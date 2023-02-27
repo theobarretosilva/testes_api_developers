@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TestStatic } from 'src/utils/test';
 import { TechnologyRepository } from '../repositories/technology.repository';
@@ -82,7 +82,18 @@ describe('technologyService', () => {
     });
 
     it('Deve retornar uma exceção, pois já existe uma Technology com esses dados', async () => {
-      mockRepository.createTechnology.mockReturnValue(null);
+      const technology = TestStatic.technologyData();
+      const technologyDTO = TestStatic.technologyDto();
+      mockRepository.getByName.mockReturnValue(technology);
+      await technologyService
+        .createTechnology(technologyDTO)
+        .catch((error: Error) => {
+          expect(error).toMatchObject({
+            message: 'entityWithArgumentsExists',
+          });
+          expect(error).toBeInstanceOf(BadRequestException);
+        });
+      expect(mockRepository.getByName).toHaveBeenCalledTimes(1);
     });
 
     it('Deve retornar uma exceção, pois não foi possivel salvar a Technology', async () => {});

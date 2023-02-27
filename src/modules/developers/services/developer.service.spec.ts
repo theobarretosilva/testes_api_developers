@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CountryRepository } from 'src/modules/countries/country.repository';
 import { DeveloperRepository } from '../repositories/developer.repository';
+import { TechnologyRepository } from '../repositories/technology.repository';
 import { DeveloperService } from './developer.service';
+import { TechnologyService } from './technology.service';
 
 describe('developerService', () => {
   let developerService: DeveloperService;
@@ -20,7 +21,7 @@ describe('developerService', () => {
       providers: [
         DeveloperService,
         {
-          provide: CountryRepository,
+          provide: DeveloperRepository,
           useValue: mockRepository,
         },
       ],
@@ -38,7 +39,11 @@ describe('developerService', () => {
     mockRepository.updateDeveloper.mockReset();
   });
 
-  it('DeveloperService deve ser definido', () => {});
+  it('DeveloperService deve ser definido', () => {
+    expect(developerService).toBeDefined();
+  });
 
-  it('DeveloperRepository deve ser definido', () => {});
+  it('DeveloperRepository deve ser definido', () => {
+    expect(developerRepository).toBeDefined();
+  });
 });

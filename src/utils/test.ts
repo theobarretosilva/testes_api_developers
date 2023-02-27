@@ -45,7 +45,7 @@ export class TestStatic {
     technology.createdAt = new Date();
     technology.deletedAt = null;
     technology.id = 1;
-    technology.name = 'Java';
+    technology.name = 'HTML5';
     technology.updatedAt = new Date();
 
     return technology;

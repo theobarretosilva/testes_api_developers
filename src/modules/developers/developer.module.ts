@@ -24,5 +24,6 @@ import { UserRepository } from '../users/user.repository';
     DeveloperRepository,
     UserService,
   ],
+  exports: [DeveloperService],
 })
 export class DeveloperModule {}
