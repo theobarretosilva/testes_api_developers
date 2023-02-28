@@ -96,8 +96,45 @@ describe('technologyService', () => {
       expect(mockRepository.getByName).toHaveBeenCalledTimes(1);
     });
 
-    it('Deve retornar uma exceção, pois não foi possivel salvar a Technology', async () => {});
+    it('Deve retornar uma exceção, pois não foi possivel salvar a Technology', async () => {
+      const technologyDTO = TestStatic.technologyDto();
+      mockRepository.createTechnology.mockReturnValue(null);
+      await technologyService
+        .createTechnology(technologyDTO)
+        .catch((error: Error) => {
+          expect(error).toMatchObject({
+            message: 'technologyNotSave',
+          });
+          expect(error).toBeInstanceOf(BadRequestException);
+        });
+      expect(mockRepository.createTechnology).toHaveBeenCalledTimes(1);
+    });
   });
 
-  describe('createManyTechnologies', () => {});
+  describe('createManyTechnologies', () => {
+    it('Deve retornar o objeto com as Technologies criadas', async () => {
+      const technologiesDto = TestStatic.technologiesDto();
+      mockRepository.createManyTechnologies.mockReturnValue(technologiesDto);
+      const createdTechnologies =
+        await technologyService.createManyTechnologies(technologiesDto);
+      expect(createdTechnologies).toMatchObject({
+        name: technologiesDto,
+      });
+      expect(mockRepository.createManyTechnologies).toHaveBeenCalledTimes(1);
+    });
+
+    it('Deve retornar uma exceção, pois está sendo cadastrado alguma Technology que já está no sistema ', async () => {
+      const technologiesDto = TestStatic.technologiesDto();
+      mockRepository.createManyTechnologies.mockReturnValue(null);
+      await technologyService
+        .createManyTechnologies(technologiesDto)
+        .catch((error: Error) => {
+          expect(error).toMatchObject({
+            message: 'entityWithArgumentsExists',
+          });
+          expect(error).toBeInstanceOf(BadRequestException);
+        });
+      expect(mockRepository.createManyTechnologies).toHaveBeenCalledTimes(1);
+    });
+  });
 });

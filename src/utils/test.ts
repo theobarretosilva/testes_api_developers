@@ -57,4 +57,14 @@ export class TestStatic {
 
     return technologyBodyDto;
   }
+
+  static technologiesDto(): CreateTechnologyDto[] {
+    const technologies = ['Java', 'CSS', 'JS', 'TS', 'Dart'].map((name) => {
+      const technologiesDto = new CreateTechnologyDto();
+      technologiesDto.name = name;
+
+      return technologiesDto;
+    });
+    return technologies;
+  }
 }
