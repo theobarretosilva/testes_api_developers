@@ -44,4 +44,30 @@ describe('developerService', () => {
   it('DeveloperRepository deve ser definido', () => {
     expect(developerRepository).toBeDefined();
   });
+
+  describe('findById', () => {
+    it('', async () => {});
+
+    it('', async () => {});
+  });
+
+  describe('createDeveloper', () => {
+    it('', async () => {});
+
+    it('', async () => {});
+
+    it('', async () => {});
+
+    it('', async () => {});
+  });
+
+  describe('updateDeveloper', () => {
+    it('', async () => {});
+
+    it('', async () => {});
+
+    it('', async () => {});
+
+    it('', async () => {});
+  });
 });

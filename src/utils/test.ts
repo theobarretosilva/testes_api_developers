@@ -67,4 +67,20 @@ export class TestStatic {
     });
     return technologies;
   }
+
+  static technologiesEntities(): TechnologyEntity[] {
+    const technologies = ['Java', 'CSS', 'JS', 'TS', 'Dart'].map(
+      (name, index) => {
+        const technologiesEntity = new TechnologyEntity();
+        technologiesEntity.createdAt = new Date();
+        technologiesEntity.deletedAt = null;
+        technologiesEntity.id = index + 1;
+        technologiesEntity.name = name;
+        technologiesEntity.updatedAt = new Date();
+
+        return technologiesEntity;
+      },
+    );
+    return technologies;
+  }
 }

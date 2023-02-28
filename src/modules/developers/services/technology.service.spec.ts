@@ -117,9 +117,12 @@ describe('technologyService', () => {
       mockRepository.createManyTechnologies.mockReturnValue(technologiesDto);
       const createdTechnologies =
         await technologyService.createManyTechnologies(technologiesDto);
-      expect(createdTechnologies).toMatchObject({
-        name: technologiesDto,
+      technologiesDto.forEach(({ name }) => {
+        expect(createdTechnologies).toMatchObject({
+          name: name[0],
+        });
       });
+
       expect(mockRepository.createManyTechnologies).toHaveBeenCalledTimes(1);
     });
 
