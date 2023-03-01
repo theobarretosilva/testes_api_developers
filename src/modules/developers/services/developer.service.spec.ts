@@ -46,28 +46,24 @@ describe('developerService', () => {
   });
 
   describe('findById', () => {
-    it('', async () => {});
+    it('Deve retornar o objeto Developer', async () => {});
 
-    it('', async () => {});
+    it('Deve retornar uma exceção, pois não foi encontrado um developer com este Id', async () => {});
   });
 
   describe('createDeveloper', () => {
-    it('', async () => {});
+    it('Deve retornar o objeto Developer criado', async () => {});
 
-    it('', async () => {});
+    it('Deve retornar uma exceção, pois já existe um developer cadastrado com esses dados', async () => {});
 
-    it('', async () => {});
-
-    it('', async () => {});
+    it('Deve retornar uma exceção, pois não foi possivel cadastrar o Developer', async () => {});
   });
 
   describe('updateDeveloper', () => {
-    it('', async () => {});
+    it('Deve retornar o objeto Developer atualizado', async () => {});
 
-    it('', async () => {});
+    it('Deve retornar uma exceção, pois não foi encontrado um developer com o Id informado', async () => {});
 
-    it('', async () => {});
-
-    it('', async () => {});
+    it('Deve retornar uma exceção, pois não foi possivel atualizar o Developer', async () => {});
   });
 });
