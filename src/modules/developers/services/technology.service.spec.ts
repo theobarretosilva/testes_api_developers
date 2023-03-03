@@ -113,13 +113,14 @@ describe('technologyService', () => {
 
   describe('createManyTechnologies', () => {
     it('Deve retornar o objeto com as Technologies criadas', async () => {
+      const technologies = TestStatic.technologiesEntities();
       const technologiesDto = TestStatic.technologiesDto();
       mockRepository.createManyTechnologies.mockReturnValue(technologiesDto);
       const createdTechnologies =
         await technologyService.createManyTechnologies(technologiesDto);
-      technologiesDto.forEach(({ name }) => {
+      technologies.map((technology) => {
         expect(createdTechnologies).toMatchObject({
-          name: name[0],
+          name: technology.name,
         });
       });
 

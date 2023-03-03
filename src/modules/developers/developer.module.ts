@@ -19,10 +19,10 @@ import { UserRepository } from '../users/user.repository';
   providers: [
     TechnologyService,
     TechnologyRepository,
+    UserService,
     UserRepository,
     DeveloperService,
     DeveloperRepository,
-    UserService,
   ],
   exports: [DeveloperService],
 })
