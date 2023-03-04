@@ -67,9 +67,15 @@ export class TestStatic {
   }
 
   static technologiesDto(): CreateTechnologyDto[] {
-    const technologies = ['Java', 'CSS', 'JS', 'TS', 'Dart'].map((name) => {
+    const technologies = [
+      { name: 'Java' },
+      { name: 'CSS' },
+      { name: 'JS' },
+      { name: 'TS' },
+      { name: 'Dart' },
+    ].map((technology) => {
       const technologiesDto = new CreateTechnologyDto();
-      technologiesDto.name = name;
+      technologiesDto.name = technology.name;
 
       return technologiesDto;
     });
@@ -130,8 +136,9 @@ export class TestStatic {
     user.id = 1;
     user.name = 'Théo Silva';
     user.salt = await bcrypt.genSalt();
-    user.password = await bcrypt.hash(user.password, user.salt);
+    user.password = '1234567891011';
     user.updatedAt = new Date();
+    user.password = await bcrypt.hash(user.password, user.salt);
 
     return user;
   }

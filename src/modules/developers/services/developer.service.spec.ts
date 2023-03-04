@@ -1,12 +1,20 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { UserService } from 'src/modules/users/services/user.service';
+import { UserRepository } from 'src/modules/users/user.repository';
 import { TestStatic } from 'src/utils/test';
 import { DeveloperRepository } from '../repositories/developer.repository';
+import { TechnologyRepository } from '../repositories/technology.repository';
 import { DeveloperService } from './developer.service';
+import { TechnologyService } from './technology.service';
 
 describe('developerService', () => {
   let developerService: DeveloperService;
   let developerRepository: DeveloperRepository;
+  let technologyService: TechnologyService;
+  let technologyRepository: TechnologyRepository;
+  let userService: UserService;
+  let userRepository: UserRepository;
 
   const mockRepository = {
     getById: jest.fn(),
@@ -20,8 +28,18 @@ describe('developerService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         DeveloperService,
+        TechnologyService,
+        UserService,
         {
           provide: DeveloperRepository,
+          useValue: mockRepository,
+        },
+        {
+          provide: TechnologyRepository,
+          useValue: mockRepository,
+        },
+        {
+          provide: UserRepository,
           useValue: mockRepository,
         },
       ],
@@ -29,6 +47,11 @@ describe('developerService', () => {
 
     developerService = module.get<DeveloperService>(DeveloperService);
     developerRepository = module.get<DeveloperRepository>(DeveloperRepository);
+    technologyService = module.get<TechnologyService>(TechnologyService);
+    technologyRepository =
+      module.get<TechnologyRepository>(TechnologyRepository);
+    userService = module.get<UserService>(UserService);
+    userRepository = module.get<UserRepository>(UserRepository);
   });
 
   beforeEach(() => {
@@ -45,6 +68,14 @@ describe('developerService', () => {
 
   it('DeveloperRepository deve ser definido', () => {
     expect(developerRepository).toBeDefined();
+  });
+
+  it('TechnologyService deve ser definido', () => {
+    expect(technologyService).toBeDefined();
+  });
+
+  it('UserService deve ser definido', () => {
+    expect(userService).toBeDefined();
   });
 
   describe('findById', () => {
@@ -140,7 +171,7 @@ describe('developerService', () => {
       expect(updateDeveloper).toMatchObject({
         acceptedRemoteWork: updatedDeveloper.acceptedRemoteWork,
       });
-      expect(mockRepository.getById).toHaveBeenCalledTimes(1);
+      expect(mockRepository.getById).toHaveBeenCalledTimes(4);
       expect(mockRepository.updateDeveloper).toHaveBeenCalledTimes(1);
     });
 
