@@ -9,7 +9,6 @@ import { CreateDeveloperDto } from 'src/modules/developers/dto/create-developer.
 import { CreateTechnologyDto } from 'src/modules/developers/dto/create-technology.dto';
 import { DeveloperEntity } from 'src/modules/developers/entities/developer.entity';
 import { TechnologyEntity } from 'src/modules/developers/entities/technology.entity';
-import * as bcrypt from 'bcrypt';
 
 export class TestStatic {
   static countryData(): CountryEntity {
@@ -101,7 +100,7 @@ export class TestStatic {
   static stateData(): StateEntity {
     const state = new StateEntity();
     state.country = this.countryData();
-    state.country_id = 1;
+    state.country_id = this.countryData().id;
     state.createdAt = new Date();
     state.deletedAt = null;
     state.id = 1;
@@ -119,31 +118,30 @@ export class TestStatic {
     city.id = 1;
     city.name = 'Juiz de Fora';
     city.state = this.stateData();
-    city.state_id = 1;
+    city.state_id = this.stateData().id;
     city.updatedAt = new Date();
 
     return city;
   }
 
-  static async usersData(): Promise<UserEntity> {
+  static userData(): UserEntity {
     const user = new UserEntity();
     user.active = true;
     user.city = this.cityData();
-    user.city_id = 1;
+    user.city_id = this.cityData().id;
     user.createdAt = new Date();
     user.deletedAt = null;
     user.email = 'email@teste.com.br';
     user.id = 1;
     user.name = 'Théo Silva';
-    user.salt = await bcrypt.genSalt();
-    user.password = '1234567891011';
+    user.salt = 'R2goJQru8IC3Zso2WabjcIqygr2B5r';
+    user.password = 'e1362338feb85a36b8b87849e5c982b0';
     user.updatedAt = new Date();
-    user.password = await bcrypt.hash(user.password, user.salt);
 
     return user;
   }
 
-  static async developerData(): Promise<DeveloperEntity> {
+  static developerData(): DeveloperEntity {
     const developer = new DeveloperEntity();
     developer.acceptedRemoteWork = true;
     developer.createdAt = new Date();
@@ -152,8 +150,8 @@ export class TestStatic {
     developer.monthsOfExperience = 12;
     developer.technologies = this.technologiesEntities();
     developer.updatedAt = new Date();
-    developer.user = await this.usersData();
-    developer.user_id = 1;
+    developer.user = this.userData();
+    developer.user_id = this.userData().id;
 
     return developer;
   }
