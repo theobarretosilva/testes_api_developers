@@ -113,9 +113,10 @@ describe('developerService', () => {
       const developerDto = TestStatic.developerDto();
       const user = TestStatic.userData();
 
+      mockUserRepository.createUser.mockReturnValue(user);
       mockRepository.getByUser.mockReturnValue(null);
       mockTechnologyRepository.getById.mockReturnValue(developer.technologies);
-      mockUserRepository.getById.mockReturnValue(user);
+      mockUserRepository.getById.mockReturnValue(user.id);
       mockRepository.createDeveloper.mockReturnValue(developer);
 
       const createdDeveloper = await developerService.createDeveloper(
@@ -127,6 +128,7 @@ describe('developerService', () => {
       expect(mockRepository.getByUser).toHaveBeenCalledTimes(1);
       expect(mockRepository.createDeveloper).toHaveBeenCalledTimes(1);
       expect(mockUserRepository.getById).toHaveBeenCalledTimes(1);
+      expect(mockTechnologyRepository.getById).toHaveBeenCalledTimes(1);
     });
 
     it('Deve retornar uma exceção, pois já existe um developer cadastrado com esses dados', async () => {
