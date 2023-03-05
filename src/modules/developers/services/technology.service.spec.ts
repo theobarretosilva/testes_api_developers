@@ -49,18 +49,24 @@ describe('technologyService', () => {
   describe('findById', () => {
     it('Deve retornar o objeto Technology', async () => {
       const technology = TestStatic.technologyData();
+
       mockRepository.getById.mockReturnValue(technology);
+
       const foundTechnology = await technologyService.findById(technology.id);
+
       expect(foundTechnology).toMatchObject({ id: technology.id });
       expect(mockRepository.getById).toHaveBeenCalledTimes(1);
     });
 
     it('Deve retornar uma exceção, pois não foi encontrada uma tecnologia com esse Id', async () => {
-      mockRepository.getById.mockReturnValue(null);
       const technologyId = 1;
+
+      mockRepository.getById.mockReturnValue(null);
+
       expect(technologyService.findById(technologyId)).rejects.toBeInstanceOf(
         NotFoundException,
       );
+
       expect(mockRepository.getById).toHaveBeenCalledTimes(1);
     });
   });
@@ -69,14 +75,17 @@ describe('technologyService', () => {
     it('Deve retornar o objeto Technology criado', async () => {
       const technologyDTO = TestStatic.technologyDto();
       const technology = TestStatic.technologyData();
+
       mockRepository.getByName.mockReturnValue(null);
       mockRepository.createTechnology.mockReturnValue(technology);
+
       const createdCountry = await technologyService.createTechnology(
         technologyDTO,
       );
       expect(createdCountry).toMatchObject({
         name: technologyDTO.name,
       });
+
       expect(mockRepository.getByName).toHaveBeenCalledTimes(1);
       expect(mockRepository.createTechnology).toHaveBeenCalledTimes(1);
     });
@@ -84,7 +93,9 @@ describe('technologyService', () => {
     it('Deve retornar uma exceção, pois já existe uma Technology com esses dados', async () => {
       const technology = TestStatic.technologyData();
       const technologyDTO = TestStatic.technologyDto();
+
       mockRepository.getByName.mockReturnValue(technology);
+
       await technologyService
         .createTechnology(technologyDTO)
         .catch((error: Error) => {
@@ -93,12 +104,15 @@ describe('technologyService', () => {
           });
           expect(error).toBeInstanceOf(BadRequestException);
         });
+
       expect(mockRepository.getByName).toHaveBeenCalledTimes(1);
     });
 
     it('Deve retornar uma exceção, pois não foi possivel salvar a Technology', async () => {
       const technologyDTO = TestStatic.technologyDto();
+
       mockRepository.createTechnology.mockReturnValue(null);
+
       await technologyService
         .createTechnology(technologyDTO)
         .catch((error: Error) => {
@@ -107,6 +121,7 @@ describe('technologyService', () => {
           });
           expect(error).toBeInstanceOf(BadRequestException);
         });
+
       expect(mockRepository.createTechnology).toHaveBeenCalledTimes(1);
     });
   });
@@ -114,16 +129,21 @@ describe('technologyService', () => {
   describe('createManyTechnologies', () => {
     it('Deve retornar o objeto com as Technologies criadas', async () => {
       const technologiesDto = TestStatic.technologiesDto();
+
       mockRepository.createManyTechnologies.mockReturnValue(technologiesDto);
+
       const createdTechnologies =
         await technologyService.createManyTechnologies(technologiesDto);
       expect(createdTechnologies).toMatchObject(technologiesDto);
+
       expect(mockRepository.createManyTechnologies).toHaveBeenCalledTimes(1);
     });
 
     it('Deve retornar uma exceção, pois está sendo cadastrado alguma Technology que já está no sistema ', async () => {
       const technologiesDto = TestStatic.technologiesDto();
+
       mockRepository.createManyTechnologies.mockReturnValue(null);
+
       await technologyService
         .createManyTechnologies(technologiesDto)
         .catch((error: Error) => {
@@ -132,6 +152,7 @@ describe('technologyService', () => {
           });
           expect(error).toBeInstanceOf(BadRequestException);
         });
+
       expect(mockRepository.createManyTechnologies).toHaveBeenCalledTimes(1);
     });
   });

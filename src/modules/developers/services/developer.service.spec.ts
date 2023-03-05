@@ -89,13 +89,11 @@ describe('developerService', () => {
   describe('findById', () => {
     it('Deve retornar o objeto Developer', async () => {
       const developer = TestStatic.developerData();
+
       mockRepository.getById.mockReturnValue(developer);
-      const foundDeveloper = await developerService.findById(
-        (
-          await developer
-        ).id,
-      );
-      expect(foundDeveloper).toMatchObject({ id: (await developer).id });
+
+      const foundDeveloper = await developerService.findById(developer.id);
+      expect(foundDeveloper).toMatchObject({ id: developer.id });
       expect(mockRepository.getById).toHaveBeenCalledTimes(1);
     });
 
@@ -116,8 +114,8 @@ describe('developerService', () => {
       const user = TestStatic.userData();
 
       mockRepository.getByUser.mockReturnValue(null);
-      mockUserRepository.getById.mockReturnValue(user);
       mockTechnologyRepository.getById.mockReturnValue(developer.technologies);
+      mockUserRepository.getById.mockReturnValue(user);
       mockRepository.createDeveloper.mockReturnValue(developer);
 
       const createdDeveloper = await developerService.createDeveloper(
@@ -175,9 +173,7 @@ describe('developerService', () => {
         ...updatedDeveloper,
       });
       const updateDeveloper = await developerService.updateDeveloper(
-        (
-          await developer
-        ).id,
+        developer.id,
         developerDto,
       );
       expect(updateDeveloper).toMatchObject({
@@ -201,23 +197,23 @@ describe('developerService', () => {
       expect(mockRepository.getById).toHaveBeenCalledTimes(1);
     });
 
-    // it('Deve retornar uma exceção, pois não foi possivel atualizar o Developer', async () => {
-    //   const developer = TestStatic.developerData();
-    //   const developerDto = TestStatic.developerDto();
+    it('Deve retornar uma exceção, pois não foi possivel atualizar o Developer', async () => {
+      const developer = TestStatic.developerData();
+      const developerDto = TestStatic.developerDto();
 
-    //   mockRepository.updateDeveloper.mockReturnValue(null);
-    //   mockRepository.getById.mockReturnValue(null);
+      mockRepository.updateDeveloper.mockReturnValue(null);
+      mockRepository.getById.mockReturnValue(developer);
 
-    //   await developerService
-    //     .updateDeveloper(developer.id, developerDto)
-    //     .catch((error: Error) => {
-    //       expect(error).toMatchObject({
-    //         message: 'developerNotUpdate',
-    //       });
-    //       expect(error).toBeInstanceOf(BadRequestException);
-    //     });
+      await developerService
+        .updateDeveloper(developer.id, developerDto)
+        .catch((error: Error) => {
+          expect(error).toMatchObject({
+            message: 'developerNotUpdate',
+          });
+          expect(error).toBeInstanceOf(BadRequestException);
+        });
 
-    //   expect(mockRepository.updateDeveloper).toHaveBeenCalledTimes(1);
-    // });
+      expect(mockRepository.updateDeveloper).toHaveBeenCalledTimes(1);
+    });
   });
 });
