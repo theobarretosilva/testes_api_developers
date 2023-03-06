@@ -16,3 +16,6 @@
 ## Aplicação
 Disponibilizei uma documentação utilizando Swagger com a especificação `Openapi 3.0.0`, na rota /api-docs.
 #
+
+## Deploy da aplicação
+http://projeto1modulo3env-env.eba-gm8p3v36.sa-east-1.elasticbeanstalk.com/
