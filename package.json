@@ -11,7 +11,7 @@
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert",
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "npm run nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "node dist/src/main",
     "start:local": "nest start",
