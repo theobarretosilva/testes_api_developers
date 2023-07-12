@@ -1,4 +1,7 @@
 # api-developers
+
+Repositório do projeto 1 do módulo 3 do curso DevInHouse[Intelbras] contendo os testes do do projeto api-developers.
+
 ## Pré-requisitos
 - Ter o `node` instalado na máquina;
 - Ter o `postgres` instalado na máquina
